@@ -1,0 +1,1 @@
+This is a code to help with selecting Secret Santa amongst participants and then sending out the emails.
