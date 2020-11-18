@@ -1,5 +1,5 @@
 import mail
-import csv, random, copy, sys, getopt
+import csv, random, copy, sys
 
 class Person:
 	def __init__(self, name, email, wishlist):
@@ -47,12 +47,20 @@ def draw_names(names):
 			choose.pop(choose.index(chosen))
 	return selections
 
+def send_mails(infos,selections):
+	for pair in selections:
+		sender = pair[0]
+		receiver = pair[1]
+		email = infos[sender].email()
+		wishlist = infos[receiver].wishlist()
+		mail.mail(sender,receiver,email,wishlist)
+
 def main(argv):
 	if not len(argv) == 2:
 		raise TypeError('This takes 2 arguments ({} given)'.format(len(argv)))
 	infos, names = enter_infos(argv[0], argv[1])
 	selections = draw_names(names)
-	print(selections)
+	send_mails(infos, selections)
 
 if __name__=="__main__":
 	main(sys.argv[1:])
