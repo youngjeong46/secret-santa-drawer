@@ -3,6 +3,7 @@ import csv
 import random
 import copy
 import sys
+import argparse
 
 
 class Person:
@@ -30,10 +31,12 @@ def enter_info(csv_list, domain):
 	f = open(csv_list, 'r')
 	reader = csv.reader(f)
 	next(reader, None)
-
 	for row in reader:
 		names.append(row[0])
-		info[row[0]] = Person(row[0], convert_emails(row[1], domain), row[2])
+		email = row[1]
+		if domain:
+			email = convert_emails(email, domain)
+		info[row[0]] = Person(row[0], email, row[2])
 
 	return info, names
 
@@ -65,9 +68,14 @@ def send_mails(info, selections):
 
 
 def main(argv):
-	if not len(argv) == 2:
-		raise TypeError('This takes 2 arguments ({} given)'.format(len(argv)))
-	info, names = enter_info(argv[0], argv[1])
+	parser = argparse.ArgumentParser(description='Process some integers.')
+	parser.add_argument('file')
+	parser.add_argument('--domain', '-D', dest="domain", action='store',
+						help='domain for participant emails '\
+							 '(use this if you are running a '\
+							 'company secret santa, for example).')
+	args = parser.parse_args()
+	info, names = enter_info(args.file, args.domain)
 	selections = draw_names(names)
 	send_mails(info, selections)
 
