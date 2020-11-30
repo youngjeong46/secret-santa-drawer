@@ -17,7 +17,8 @@ def mail(sender, receiver, email, wishlist):
 
     Thank you for participating in the season of gift giving! You are.... {receiver}'s Secret Unicorn! 
 
-    Please look at their wish list: {wishlist}.
+    Please look at the wish list: 
+    {wishlist}.
 
     Thanks and let's have fun with this!!
 
@@ -48,6 +49,8 @@ def mail(sender, receiver, email, wishlist):
             print("")
             user.login(host_email, password)
             user.sendmail(host_email, email, msg.format(name=sender, receiver=receiver, wishlist=wishlist))
+            print("Success!")
+            print("")
             user.quit()
         except smtplib.SMTPAuthenticationError:
             if config.pass_word:

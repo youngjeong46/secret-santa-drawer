@@ -4,6 +4,7 @@ import random
 import copy
 import sys
 import argparse
+import time
 
 
 class Person:
@@ -65,6 +66,7 @@ def send_mails(info, selections):
 		email = info[sender].email()
 		wishlist = info[receiver].wishlist()
 		mail.mail(sender, receiver, email, wishlist)
+		time.sleep(2)
 
 
 def main(argv):
