@@ -5,13 +5,19 @@ Each participant receives an email of who he/she picked, what their email is, an
 
 ***Running the code:***
 
+```sh
+python main.py [--domain DOMAIN] [filename]
 ```
-python main.py [filename]
+
+or
+
+```sh
+./main [--domain DOMAIN] [filename]
 ```
 
 Arguments:
 
-- file (required): List of participants, their emails and what they want, in CSV format. Please see "example.csv" for an example.
+- filename (required): List of participants, their emails and what they want, in CSV format. Please see "example.csv" for an example.
 - --domain, -D (optional): Domain name, if all the participants have the same email domains (i.e. gmail.com). In this case, your CSV file must have email usernames without the appending "@" and the domain name. See "example-domain.csv" for details.
 
 ***Files Required***
